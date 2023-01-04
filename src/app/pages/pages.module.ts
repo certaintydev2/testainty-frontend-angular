@@ -20,9 +20,10 @@ import { TestevalutioncandidatelistComponent } from './testevalutioncandidatelis
 import { LoaderComponent } from './loader/loader.component';
 import { BackdoreentryGuard } from '../gurds/backdoreentry/backdoreentry.guard';
 
+import { SearchPipe } from '../pipes/search/search.pipe';
 
 @NgModule({
-  declarations: [PagesComponent,TimerpipePipe, DashboardComponent, HeaderComponent, QuestioncreationComponent, CandidateinterviewComponent, TestevaluationComponent, TestresultComponent, AllresultComponent, AllcandidatesComponent, TestevalutioncandidatelistComponent, LoaderComponent],
+  declarations: [PagesComponent,TimerpipePipe, DashboardComponent, HeaderComponent, QuestioncreationComponent, CandidateinterviewComponent, TestevaluationComponent, TestresultComponent, AllresultComponent, AllcandidatesComponent, TestevalutioncandidatelistComponent, LoaderComponent, SearchPipe],
   imports: [
     CommonModule,
     PagesRoutingModule,

@@ -1,7 +1,6 @@
 
 <app-loader></app-loader>
 <section class="candidateIntervieScreen">
-    
     <div class="container mt-4">
         <div class="d-flex align-items-center justify-content-between">
             <h4>Full Name: <strong>{{allQuestionData?.first_name}} {{allQuestionData?.last_name}}</strong></h4>
@@ -32,9 +31,10 @@
                         <mat-step class="">
                             <div class="submitStep">
                                 <div>
-                                    <h4>Thank You for Interview we will contact soon !!</h4>
+                                    <h2 *ngIf="msg" class="text-center">Test Submitted Successfully <br/>
+                                         Thank You for Interview we will contact soon !!</h2>
                                     <!-- <button mat-raised-button matStepperPrevious>Back</button> &nbsp;&nbsp; -->
-                                    <div class="d-flex justify-content-center">
+                                    <div *ngIf="hideSubmitButton"  class="d-flex justify-content-center">
                                         <button (click)="formSubmit()" type="submit" mat-raised-button color="primary">Submit</button>
                                     </div>
                                 </div>

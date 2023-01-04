@@ -42,7 +42,7 @@ export class TestevaluationComponent implements OnInit {
         if(this.allQuestionAndanswer.questions.length === 0){
           this.candidateTestNotSubmit = true;
         }else{
-
+          console.log('data res =>', res);
         }
         // setTimeout(() => {
         this.spinner.hide();
@@ -383,6 +383,7 @@ export class TestevaluationComponent implements OnInit {
 
   finalSubmit() {
 
+    
     let finalObj = {
       question: this.createNewObj,
       candidate_id: this.allQuestionAndanswer?.candidate_id

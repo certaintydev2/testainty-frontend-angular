@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -24,24 +24,27 @@ export class AllcandidatesComponent implements OnInit {
 
 
   displayedColumns: string[] = ['position_applied_for', 'candidate_name', 'experience', 'email', 'mobile', 'result'];
-  dataSource! :  MatTableDataSource<any>;
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('filter', {static: false}) filter!: ElementRef;
 
-  constructor(private _allresultService: AllresultService, public _toster:ToastrService) {
+  constructor(private _allresultService: AllresultService, public _toster: ToastrService) {
   }
 
-  seeAllResult:any;
+
+
+  seeAllResult: any;
 
   ngOnInit(): void {
 
-    this._allresultService.seeAllCandidates().subscribe((res:any) => {
-        this.seeAllResult = res;
-        console.log('seeAllResult1', this.seeAllResult)
-        this.dataSource = new MatTableDataSource(this.seeAllResult?.Candidates);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+    this._allresultService.seeAllCandidates().subscribe((res: any) => {
+      this.seeAllResult = res;
+      console.log('all candidates', this.seeAllResult)
+      this.dataSource = new MatTableDataSource(this.seeAllResult?.Candidates);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     }, error => {
       this._toster.error(error, '', {
         timeOut: 2000,
@@ -49,5 +52,25 @@ export class AllcandidatesComponent implements OnInit {
         progressAnimation: 'decreasing'
       });
     })
+
+    // this.dataSource.filterPredicate = (data:
+    //   { name: string }, filterValue: string) =>
+    //   data.name.trim().toLowerCase().indexOf(filterValue) !== -1;
+
   }
+
+  // applyFilter(filterValue: any) {
+  //   let s = filterValue.target.value
+  //   this.dataSource.filter = s.trim().toLowerCase();
+  // }
+
+  // ngAfterViewInit() {
+  //   this.dataSource.paginator = this.paginator
+  // }
+  
+    filterTable (filterValue :any) { 
+      let fil = filterValue.target.value
+      return this.dataSource.filter = fil.trim().toLowerCase(); 
+    }
+
 }

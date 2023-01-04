@@ -1,9 +1,13 @@
 <div class="container mt-4">
     <div class="row h-100 mb-5 align-items-center justify-content-center">
         <div class="col-md-10">
-            <div class="alert alert-success" *ngIf="showUrl">
-                <strong>Success!</strong> Copy this URL
-                <a target="_blank" href={{generateUrlForTest}} class="alert-link">{{generateUrlForTest}}</a>
+            <div *ngIf="showUrl" class="alert alert-success d-flex justify-content-between align-items-center">
+                <div>
+                    <strong>Success!</strong> Copy this URL
+                    <a target="_blank" href={{generateUrlForTest}} class="alert-link">{{generateUrlForTest}}</a>
+                </div>
+                <button mat-mini-fab color="" type="button" cdkCopyToClipboard={{generateUrlForTest}} ><mat-icon color="info" >content_copy</mat-icon></button>
+                
             </div>
 
             <div class="card">

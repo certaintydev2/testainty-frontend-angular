@@ -14,7 +14,7 @@ import { BackdoreentryGuard } from './gurds/backdoreentry/backdoreentry.guard';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

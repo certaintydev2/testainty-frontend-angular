@@ -10,7 +10,7 @@ import { Component } from '@angular/core';
 
 
 export class AppComponent {
-  title = 'InterviewTest';
+  title = 'Interview Test';
 
   constructor(private _router: Router, public _loginServcie: LoginService) { }
 

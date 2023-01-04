@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { QuestionService } from '../../services/question/question.service';
@@ -22,20 +22,45 @@ export class CandidateinterviewComponent implements OnInit {
   filled_data: any = [];
   filled_data_hold: any = [];
   answere: any;
-
-
-  constructor(private spinner: NgxSpinnerService,private _formBuilder: FormBuilder, private _router: Router, private _ActivatedRoute: ActivatedRoute, private _questionService: QuestionService, private _candidateTestSubmit: CandidatetestsubmitService, private _toseter:ToastrService ) {}
-
-
   timerDown!: number;
 
+
+  constructor(private spinner: NgxSpinnerService, private _formBuilder: FormBuilder, private _router: Router, private _ActivatedRoute: ActivatedRoute, private _questionService: QuestionService, private _candidateTestSubmit: CandidatetestsubmitService, private _toseter: ToastrService) { }
+
+
+
+    // refresh code 
+
+  @HostListener("window:beforeunload", ["$event"])
+  
+  unloadHandler(event: any) {
+    event.preventDefault();
+    return event.returnValue = "Are you sure you want to exit?";
+  }
+  // refresh code close
+
+  // disable right click
+  @HostListener('contextmenu', ['$event'])
+  onRightClick(event:any) {
+    event.preventDefault();
+  }
+  // disable right click close
+
   ngOnInit(): void {
+
+
+    // refresh code 
+    window.addEventListener("keyup", disableF5);
+    window.addEventListener("keydown", disableF5);
+    function disableF5(e: any) {
+      if ((e.which || e.keyCode) == 116) e.preventDefault();
+    }
+    // refresh code close
+
     this.spinner.show();
 
     this._ActivatedRoute.params.subscribe(params => {
       this.getID = params['id'] //log the value of id
-
-    });
 
     this._questionService.displayQuestions(this.getID).subscribe((res: any) => {
       this.allQuestionData = res;
@@ -46,38 +71,45 @@ export class CandidateinterviewComponent implements OnInit {
       this.countdown("ten-countdown", this.timerDown, 0);
       this.spinner.hide();
 
-    })
+    });
+    });
 
   }
 
 
-  
-   tempData:any = [] ;
+  tempData: any = [];
 
   collectAnswere(customerGroup: any, answere: any) {
 
-    this.tempData.push({question_id: customerGroup.question_id,
-    level: customerGroup.level,
-    question: customerGroup.question,
-    skill: customerGroup.skill,
-    answer: answere});
+    this.tempData.push({
+      question_id: customerGroup.question_id,
+      level: customerGroup.level,
+      question: customerGroup.question,
+      skill: customerGroup.skill,
+      answer: answere
+    });
     console.log('this.filled_data', this.tempData);
-    
+
     this.answere = '';
     // console.log('this.filled_data', this.filled_data);
-    
+
   }
-  
+
+  msg:boolean = false;
+  hideSubmitButton:boolean = true;
   formSubmit() {
+
+    this.msg = true;
+    this.hideSubmitButton = false;
     
     let obj = {
-      candidate_id:this.allQuestionData?.candidate_id,
-      question:this.tempData,
+      candidate_id: this.allQuestionData?.candidate_id,
+      question: this.tempData,
     }
     console.log('form submit filled_data', this.filled_data);
 
     // let data = this.filled_data;
-    this._candidateTestSubmit.submitedTest(obj).subscribe((res:any) => {
+    this._candidateTestSubmit.submitedTest(obj).subscribe((res: any) => {
       console.log('res submit test', res);
       this._toseter.success('Test Submitted Successfully', '', {
         timeOut: 2000,
@@ -87,11 +119,11 @@ export class CandidateinterviewComponent implements OnInit {
     }, err => {
       console.log('Something wrong', err);
       this._toseter.error(err.msg, '', {
-          timeOut: 2000,
-          progressBar: true,
-          progressAnimation: 'decreasing'
-        });
+        timeOut: 2000,
+        progressBar: true,
+        progressAnimation: 'decreasing'
       });
+    });
 
     // this._router.navigate(['pages/test-result/', 7])
 

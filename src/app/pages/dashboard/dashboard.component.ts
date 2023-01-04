@@ -56,6 +56,7 @@ export class DashboardComponent implements OnInit {
 
     this._candidateDataSendServices.candidateProfileData(this.candidateProfileForm.value).subscribe((data:any) => {
       this.showUrl = true
+      localStorage.setItem('uid', data.candidate_id);
       this.generateUrlForTest = environment.localUrl+'pages/candidate-interview/'+data.candidate_id;
       console.log('generateUrlForTest', this.generateUrlForTest);
       this._toster.success(data.msg, '', {
