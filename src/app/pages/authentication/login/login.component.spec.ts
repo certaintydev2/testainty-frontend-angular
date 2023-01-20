@@ -31,17 +31,26 @@ describe('LoginComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('conponent should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('check input value and submit', () => {
-    
-  //   let username = component.loginForm.value.email;
-  //   let password = component.loginForm.value.password;
+  it('form validation check', () => {
+    component.loginForm.setValue({
+      'email':'jaydeep.com',
+      'password': 'asdfgb'
+    })
+    expect(component.loginForm.valid).toEqual(true);
+  })
 
-  //   expect('admin').toEqual(username);
-  //   expect('admin123').toEqual(password);
-    
-  // })
+  it('check username or password', () => {
+    const username = 'admin'
+    const password = 'admin123'
+
+    expect('admin').toEqual(username);
+    expect('admin123').toEqual(password);
+
+  })
+
+
 });

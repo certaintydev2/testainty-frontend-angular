@@ -4,16 +4,16 @@
 
 .dropstart .dropdown-menu[data-bs-popper] {
   top: 54px;
-  right: 60%;
+  right: 80%;
   left: auto;
 }
 
 // multi level dropdown
 ul{
   li{
-    padding: 7px 10px;
+    padding: 4px 4px;
     letter-spacing: 1px;
-    font-size: 15px;
+    font-size: 13px;
     i{
       padding-right: 10px;
     }
@@ -32,7 +32,7 @@ ul{
   display: block;
   z-index: 9;
   position: absolute;
-  left: 120px;
+  left: 100px;
   top: 30px;
   background: #fff;
   box-shadow: 0px 1px 3px rgb(0 0 0 / 40%);

@@ -39,8 +39,9 @@ export class AllresultComponent implements OnInit {
 
     this._allresultService.seeAllResults().subscribe((res:any) => {
         this.seeAllResult = res;
-        console.log('seeAllResult', res)
-        this.dataSource = new MatTableDataSource(this.seeAllResult);
+        console.log('seeAllResult', res);
+      let reverses = this.seeAllResult.reverse()
+        this.dataSource = new MatTableDataSource(reverses);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
     }, error => {

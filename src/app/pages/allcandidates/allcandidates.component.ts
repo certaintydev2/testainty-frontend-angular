@@ -41,12 +41,13 @@ export class AllcandidatesComponent implements OnInit {
 
     this._allresultService.seeAllCandidates().subscribe((res: any) => {
       this.seeAllResult = res;
-      console.log('all candidates', this.seeAllResult)
-      this.dataSource = new MatTableDataSource(this.seeAllResult?.Candidates);
+      // console.log('all candidates', this.seeAllResult)
+      let reverses = this.seeAllResult?.Candidates.reverse()
+      this.dataSource = new MatTableDataSource(reverses);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     }, error => {
-      this._toster.error(error, '', {
+      this._toster.error(error, 'data not found', {
         timeOut: 2000,
         progressBar: true,
         progressAnimation: 'decreasing'

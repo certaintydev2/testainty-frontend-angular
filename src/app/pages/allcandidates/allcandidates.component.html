@@ -70,11 +70,11 @@
 
                               <!-- <tr [ngClass]="{'d-none':dataSource.filteredData!=null}" mat-footer-row *matFooterRowDef='["loading"]'></tr> -->
 
-                              <tr [ngClass]="{'d-none': !(dataSource.filteredData!=null && dataSource.filteredData.length === 0)}" mat-footer-row *matFooterRowDef='["noData"]'></tr>
+                              <!-- <tr [ngClass]="{'d-none': !(dataSource.filteredData!=null && dataSource.filteredData.length === 0)}" mat-footer-row *matFooterRowDef='["noData"]'></tr> -->
 
                         </table>
 
-                        <mat-paginator [pageSizeOptions]="[ 9, 25, 100]" aria-label="Select page of users">
+                        <mat-paginator [pageSizeOptions]="[ 5, 10, 25, 100]" aria-label="Select page of users">
                         </mat-paginator>
                     </div>
                 </div>

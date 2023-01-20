@@ -40,7 +40,15 @@
                             <ng-container matColumnDef="result">
                                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Result( Pass or Fail) </th>
                                 <td mat-cell *matCellDef="let row">
-                                    <span [ngClass]="{'bg-success': row?.test_result ==='Pass', 'bg-danger': row?.test_result ==='Fail' }" class="badge px-3 py-2">{{row.test_result}} </span>
+
+                                    <div *ngIf="row?.test_result === null;else other_content">
+                                        <span class="bg-warning badge px-3 py-2">Not submited</span> 
+                                    </div>
+                                    <ng-template #other_content>
+                                        <span [ngClass]="{'bg-success': row?.test_result ==='Pass', 'bg-danger': row?.test_result ==='Fail' }" class="badge px-3 py-2">{{row.test_result}} 
+                                        </span>
+                                    </ng-template>
+
                                 </td>
                             </ng-container>
 
@@ -49,7 +57,7 @@
 
                         </table>
 
-                        <mat-paginator [pageSizeOptions]="[ 9, 25, 100]" aria-label="Select page of users">
+                        <mat-paginator [pageSizeOptions]="[ 5, 10, 25, 100]" aria-label="Select page of users">
                         </mat-paginator>
                     </div>
 
